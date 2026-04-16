@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: serviceforotus
+spec:
+  containers:
+    - name: app
+      image: e1name/forotus:v1
+      ports:
+        - containerPort: 8000
