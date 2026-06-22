@@ -1,0 +1,13 @@
+auth:
+  database: users_service
+  username: users_service_user
+  password: users_service_password
+  postgresPassword: users_service_admin_password
+
+primary:
+  persistence:
+    enabled: true
+    size: 1Gi
+
+volumePermissions:
+  enabled: true

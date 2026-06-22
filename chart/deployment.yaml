@@ -1,33 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: users-service
   labels:
-    app: backend
+    app: users-service
 spec:
-  replicas: 3
-  strategy:
-    type: Recreate
+  replicas: 2
   selector:
     matchLabels:
-      app: backend
+      app: users-service
   template:
     metadata:
       labels:
-        app: backend
+        app: users-service
     spec:
       containers:
-        - name: backend
-          image: e1name/forotus:v1
+        - name: users-service
+          image: e1name/forotus:users-crud
           imagePullPolicy: IfNotPresent
           ports:
-            - name: backend
+            - name: http
               containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: users-service-config
+            - secretRef:
+                name: users-service-secret
           livenessProbe:
             httpGet:
-              path: /health/
+              path: /live
               port: 8000
             initialDelaySeconds: 15
             periodSeconds: 30
             timeoutSeconds: 1
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
             failureThreshold: 6
