@@ -1,0 +1,36 @@
+newman
+
+serviceforotus users CRUD
+
+-> Healthcheck
+  GET http://arch.homework:8080/health/ [200 OK, 147B, 34ms]
+  OK Status code is 200
+  OK Health status is OK
+
+-> Create user
+  POST http://arch.homework:8080/users [201 Created, 359B, 48ms]
+  OK Status code is 201
+  OK Created user has id
+
+-> Get user
+  GET http://arch.homework:8080/users/1 [200 OK, 354B, 39ms]
+  OK Status code is 200
+  OK Returned requested user
+
+-> Update user
+  PUT http://arch.homework:8080/users/1 [200 OK, 354B, 9ms]
+  OK Status code is 200
+  OK User was updated
+
+-> Delete user
+  DELETE http://arch.homework:8080/users/1 [204 No Content, 88B, 7ms]
+  OK Status code is 204
+
+Summary:
+iterations: 1 executed, 0 failed
+requests: 5 executed, 0 failed
+test-scripts: 5 executed, 0 failed
+assertions: 9 executed, 0 failed
+total run duration: 201ms
+total data received: 678B
+average response time: 27ms
