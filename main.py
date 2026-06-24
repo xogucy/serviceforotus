@@ -1,9 +1,6 @@
-from fastapi import FastAPI
+import sys
+from pathlib import Path
 
+sys.path.append(str(Path(__file__).parent / "src"))
 
-app = FastAPI()
-
-
-@app.get("/health/")
-def healthcheck() -> dict[str, str]:
-    return {"status": "OK"}
+from app.main import app  # noqa: E402,F401
