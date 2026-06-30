@@ -1,13 +1,13 @@
 PYTHON := .venv/bin/python
 
-.PHONY: install run test deploy delete
+.PHONY: install run test deploy delete local-infra-up local-apps-up local-down local-reset local-logs local-ps
 
 install:
-	$(PYTHON) -m pip install -r requirements.txt
+	$(PYTHON) -m pip install -r services/user-service/requirements.txt
 	npm install -g newman
 
 run:
-	$(PYTHON) -m uvicorn main:app --host 0.0.0.0 --port 8000
+	cd services/user-service && ../../$(PYTHON) -m uvicorn main:app --host 0.0.0.0 --port 8000
 
 test:
 	newman run serviceforotus.postman_collection.json
@@ -30,3 +30,21 @@ delete:
 	kubectl delete -f chart/deployment.yaml --ignore-not-found=true
 	helm uninstall nginx -n m || true
 	kubectl delete namespace m --ignore-not-found=true --wait=false
+
+local-infra-up:
+	./scripts/local-infra-up.sh
+
+local-apps-up:
+	./scripts/local-apps-up.sh
+
+local-down:
+	./scripts/local-down.sh
+
+local-reset:
+	./scripts/local-reset.sh
+
+local-logs:
+	./scripts/local-logs.sh
+
+local-ps:
+	./scripts/local-ps.sh

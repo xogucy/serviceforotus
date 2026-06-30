@@ -1,13 +1,12 @@
 # serviceforotus
 
-<<<<<<< Updated upstream
-Минимальный сервис на FastAPI.
-
-## Проверка
-=======
 REST-сервис на FastAPI c регистрацией, логином по JWT и доступом к профилю только для владельца.
 
+## Архитектура
 
+Приложение реализовано как один backend-сервис `users-service`. Он отвечает за регистрацию пользователя, аутентификацию, выпуск JWT-токена, чтение и обновление собственного профиля. Внешний трафик приходит через `nginx-ingress`, данные хранятся в PostgreSQL, конфигурация передается через `ConfigMap`, а секреты подключения к БД и JWT key через `Secret`. Первичная схема БД поднимается Kubernetes `Job` с Alembic.
+
+![Sequence diagram](img/auth-profile-sequence.svg)
 
 ## API
 
@@ -25,26 +24,16 @@ REST-сервис на FastAPI c регистрацией, логином по J
 - `GET /ready` - readiness c проверкой БД
 
 ## Локальный запуск
->>>>>>> Stashed changes
 
 ```bash
-make install
-make deploy
-make test
-make delete
+cp .env.example .env
+docker compose up --build db migrate app
 ```
 
-## Коллекция Postman
+После запуска сервис доступен на `http://localhost:8000`.
 
-Файл коллекции: `serviceforotus.postman_collection.json`.
+## Kubernetes
 
-<<<<<<< Updated upstream
-Коллекция проверяет:
-
-- `GET http://arch.homework/health/`
-- ответ `200 OK`
-- тело ответа `{"status":"OK"}`
-=======
 Namespace для установки:
 
 ```bash
@@ -134,9 +123,12 @@ kubectl port-forward -n otus svc/nginx-ingress-nginx-controller 8080:80
 newman run serviceforotus.postman_collection.json --env-var baseUrl=http://arch.homework:8080
 ```
 
-Пример вывода Newman сохранен в `newman-run.txt`. Его стоит обновить после прогона нового auth/profile сценария.
+Скрин успешного прогона Newman:
+
+![Newman run](img/newman-auth-profile-run.svg)
+
+Текстовый вывод также сохранен в `newman-run.txt`.
 
 ## Манифесты
 
 Kubernetes-манифесты находятся в директории `chart/`.
->>>>>>> Stashed changes

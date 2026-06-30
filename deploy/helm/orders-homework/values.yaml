@@ -1,0 +1,19 @@
+# Placeholder values for future implementation.
+
+global:
+  namespace: orders-homework
+  host: arch.homework
+
+kafka:
+  enabled: true
+  topic: order.payment.result
+
+services:
+  userService:
+    image: ""
+  billingService:
+    image: ""
+  orderService:
+    image: ""
+  notificationService:
+    image: ""

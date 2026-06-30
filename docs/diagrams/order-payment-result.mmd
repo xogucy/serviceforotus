@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor Client
+    participant Order as order-service
+    participant Billing as billing-service
+    participant Broker as Kafka
+    participant Notify as notification-service
+
+    Client->>Order: POST /orders
+    Order->>Billing: POST /accounts/{userId}/withdraw
+    Billing-->>Order: payment result
+    Order->>Broker: publish OrderPaymentResult
+    Broker-->>Notify: consume OrderPaymentResult
+    Notify->>Notify: save notification
+    Order-->>Client: order result

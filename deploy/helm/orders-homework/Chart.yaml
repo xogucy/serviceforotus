@@ -1,0 +1,7 @@
+apiVersion: v2
+name: orders-homework
+description: Helm chart placeholder for the order service homework
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+

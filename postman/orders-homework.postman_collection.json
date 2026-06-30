@@ -1,0 +1,45 @@
+{
+  "info": {
+    "name": "Orders Homework",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "TODO 01 - Create user",
+      "item": []
+    },
+    {
+      "name": "TODO 02 - Check billing account",
+      "item": []
+    },
+    {
+      "name": "TODO 03 - Deposit money",
+      "item": []
+    },
+    {
+      "name": "TODO 04 - Create paid order",
+      "item": []
+    },
+    {
+      "name": "TODO 05 - Check balance after paid order",
+      "item": []
+    },
+    {
+      "name": "TODO 06 - Check success notification",
+      "item": []
+    },
+    {
+      "name": "TODO 07 - Create failed order",
+      "item": []
+    },
+    {
+      "name": "TODO 08 - Check unchanged balance",
+      "item": []
+    },
+    {
+      "name": "TODO 09 - Check failure notification",
+      "item": []
+    }
+  ]
+}
+
