@@ -1,0 +1,57 @@
+newman
+
+serviceforotus auth profile scenario
+
+-> Healthcheck
+  GET http://localhost:8000/health/ [200 OK, 140B, 15ms]
+  OK Status code is 200
+
+-> Register user 1
+  POST http://localhost:8000/api/v1/auth/register [201 Created, 270B, 250ms]
+  OK Status code is 201
+
+-> Profile unavailable without login
+  GET http://localhost:8000/profile [401 Unauthorized, 161B, 3ms]
+  OK Status code is 401
+
+-> Profile update unavailable without login
+  PUT http://localhost:8000/profile [401 Unauthorized, 161B, 3ms]
+  OK Status code is 401
+
+-> Login user 1
+  POST http://localhost:8000/api/v1/auth/login [200 OK, 286B, 207ms]
+  OK Status code is 200
+
+-> Update profile user 1
+  PUT http://localhost:8000/profile [200 OK, 349B, 7ms]
+  OK Status code is 200
+
+-> Check profile updated for user 1
+  GET http://localhost:8000/profile [200 OK, 349B, 3ms]
+  OK Status code is 200
+  OK Profile was updated
+
+-> Register user 2
+  POST http://localhost:8000/api/v1/auth/register [201 Created, 273B, 207ms]
+  OK Status code is 201
+
+-> Login user 2
+  POST http://localhost:8000/api/v1/auth/login [200 OK, 286B, 207ms]
+  OK Status code is 200
+
+-> User 2 cannot read user 1 profile
+  GET http://localhost:8000/users/1 [403 Forbidden, 154B, 3ms]
+  OK Status code is 403
+
+-> User 2 cannot update user 1 profile
+  PUT http://localhost:8000/users/1 [403 Forbidden, 154B, 2ms]
+  OK Status code is 403
+
+Summary:
+iterations: 1 executed, 0 failed
+requests: 11 executed, 0 failed
+test-scripts: 11 executed, 0 failed
+assertions: 12 executed, 0 failed
+total run duration: 1077ms
+total data received: 1.16kB
+average response time: 82ms
